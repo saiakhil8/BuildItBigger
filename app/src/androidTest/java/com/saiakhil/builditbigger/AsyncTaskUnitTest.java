@@ -35,6 +35,8 @@ public class AsyncTaskUnitTest {
     public void testEndPoint(){
 
         JokeAsyncTask jokeAsyncTask = new JokeAsyncTask();
+
+        //I searched StackOverFlow for this CountDownHatch
         final CountDownLatch countDownLatch = new CountDownLatch(1);
 
         jokeAsyncTask.setListener(new TaskListener() {

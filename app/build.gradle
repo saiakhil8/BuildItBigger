@@ -38,7 +38,9 @@ android {
 
         free{
             applicationId "com.saiakhil.builditbigger.free"
+            //I read about dimension from android docs
             dimension "tier"
+            //I understood this from StackOverFlow
             buildConfigField 'boolean', 'IS_PAID', 'false'
         }
 
