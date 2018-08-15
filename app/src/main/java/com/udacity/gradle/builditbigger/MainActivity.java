@@ -94,11 +94,8 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
 
         if (requestCode==JOKE_ACTIVITY_REQUEST_CODE){
 
-            if (!BuildConfig.IS_PAID){
-
-
+            if (BuildConfig.IS_PAID){
                 mainActivityFragment.showAd();
-
             }
 
         }
