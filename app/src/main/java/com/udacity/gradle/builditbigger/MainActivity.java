@@ -81,8 +81,10 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
 
     @Override
     public void onPostExecute(String joke) {
-        progressBar.setVisibility(View.GONE);
-        if (joke==null) return;
+        if (joke==null){
+            Toast.makeText(MainActivity.this,getResources().getString(R.string.noGce),Toast.LENGTH_SHORT).show();
+            return;
+        }
         Toast.makeText(MainActivity.this,joke,Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, JokeActivity.class);
         intent.putExtra(Intent.EXTRA_TEXT,joke);
@@ -92,9 +94,10 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        progressBar.setVisibility(View.GONE);
         if (requestCode==JOKE_ACTIVITY_REQUEST_CODE){
 
-            if (BuildConfig.IS_PAID){
+            if (!BuildConfig.IS_PAID){
                 mainActivityFragment.showAd();
             }
 

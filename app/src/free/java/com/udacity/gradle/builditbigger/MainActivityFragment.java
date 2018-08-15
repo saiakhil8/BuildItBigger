@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -33,25 +34,16 @@ public class MainActivityFragment extends Fragment {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+        initiateInterstitial();
         loadAd();
 
 
         return root;
     }
 
-    private void loadAd(){
-
-        interstitialAd = new InterstitialAd(getContext());
-
+    private void initiateInterstitial(){
+        interstitialAd = new InterstitialAd(getActivity().getApplicationContext());
         interstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad_unit_id));
-
-        if (adRequest==null){
-            adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .build();
-        }
-        interstitialAd.loadAd(adRequest);
-
         interstitialAd.setAdListener(new AdListener(){
             @Override
             public void onAdClosed() {
@@ -59,6 +51,17 @@ public class MainActivityFragment extends Fragment {
                 super.onAdClosed();
             }
         });
+    }
+
+    private void loadAd(){
+
+        if (interstitialAd == null) initiateInterstitial();
+        if (adRequest==null){
+            adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+        }
+        interstitialAd.loadAd(adRequest);
     }
 
     public void showAd(){

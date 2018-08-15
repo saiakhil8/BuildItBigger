@@ -7,7 +7,7 @@ public class JokesProvider {
     }
 
     public String retrieveJoke(){
-        return "Yes Its Working";
+        return "No more Jokes to send..Just give a smile";
     }
 
 
