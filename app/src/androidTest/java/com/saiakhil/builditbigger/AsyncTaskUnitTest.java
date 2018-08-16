@@ -49,6 +49,7 @@ public class AsyncTaskUnitTest {
             public void onPostExecute(String joke) {
 
                 Assert.assertNotSame(joke,null);
+                assert joke.length()>0;
                 countDownLatch.countDown();
             }
         });
