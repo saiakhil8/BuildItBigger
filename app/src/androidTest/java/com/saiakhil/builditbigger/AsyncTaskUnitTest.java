@@ -47,9 +47,8 @@ public class AsyncTaskUnitTest {
 
             @Override
             public void onPostExecute(String joke) {
-
-                Assert.assertNotSame(joke,null);
-                assert joke.length()>0;
+                Assert.assertNotNull(joke);
+                Assert.assertNotSame(joke.length(),0);
                 countDownLatch.countDown();
             }
         });

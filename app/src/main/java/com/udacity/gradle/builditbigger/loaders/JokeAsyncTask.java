@@ -35,7 +35,7 @@ public class JokeAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        taskListener.onPreExecute();
+        if (taskListener!=null) taskListener.onPreExecute();
         super.onPreExecute();
     }
 
@@ -74,13 +74,14 @@ public class JokeAsyncTask extends AsyncTask<String, Void, String> {
         this.taskListener = taskListener;
     }
 
+    //For Avoiding crash if Async runs in background even after main activity getting destroyed
     public void removeListener() {
         this.taskListener = null;
     }
 
     @Override
     protected void onPostExecute(String s) {
-        taskListener.onPostExecute(s);
+        if (taskListener!=null) taskListener.onPostExecute(s);
         removeListener();
         super.onPostExecute(s);
     }

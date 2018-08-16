@@ -36,3 +36,10 @@ allprojects {
         jcenter()
     }
 }
+//From review
+task buildItBigger{
+    dependsOn ":backend:appengineStart"
+    dependsOn ":app:connectedAndroidTest"
+    mustRunAfter ":backend:appengineStart"
+    finalizedBy ":backend:appengineStop"
+}

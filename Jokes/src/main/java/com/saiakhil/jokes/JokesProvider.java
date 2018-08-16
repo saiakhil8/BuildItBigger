@@ -16,14 +16,20 @@
 
 package com.saiakhil.jokes;
 
+import java.util.Random;
+
 public class JokesProvider {
+
+    private final String[] jokes  = {
+            "Here is joke1","Here is joke 2","Here is joke 3","No more Jokes to send..Just give a smile"
+    };
 
     public JokesProvider(){
 
     }
 
     public String retrieveJoke(){
-        return "No more Jokes to send..Just give a smile";
+        return jokes[new Random().nextInt(jokes.length)] ;
     }
 
 
